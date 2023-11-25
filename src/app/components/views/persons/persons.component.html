@@ -1,0 +1,19 @@
+<section class="persons-select">
+  <form class="person-form">
+    <mat-form-field>
+      <mat-label>Persons</mat-label>
+      <input
+        type="text"
+        placeholder="Select a person"
+        matInput
+        [formControl]="control"
+        [matAutocomplete]="personSearch"
+      />
+      <mat-autocomplete #personSearch="matAutocomplete">
+        <mat-option *ngFor="let person of persons" [value]="persons">
+          {{ person }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</section>
