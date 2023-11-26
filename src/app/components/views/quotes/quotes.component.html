@@ -1,5 +1,6 @@
 <section>
   <ul>
-    <li *ngFor="let quote of quotes" [value]="quotes">{{ quote }}</li>
+    <li *ngFor="let quote of quotes">{{ quote.sentence }}</li>
   </ul>
+  <button (click)="callforQuotesRetrieval()">Randomize quotes</button>
 </section>

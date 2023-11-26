@@ -9,11 +9,27 @@
         [formControl]="control"
         [matAutocomplete]="personSearch"
       />
-      <mat-autocomplete #personSearch="matAutocomplete">
-        <mat-option *ngFor="let person of persons" [value]="persons">
-          {{ person }}
+      <mat-autocomplete
+        #personSearch="matAutocomplete"
+        [displayWith]="mutateSelectionForDisplay"
+      >
+        <mat-option *ngFor="let person of persons" [value]="person">
+          {{ person.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
   </form>
+</section>
+<section class="person-details">
+  <ng-template [ngIf]="!!personDetails">
+    <div>Name: {{ personDetails.name }}</div>
+    <div>House: {{ personDetails.house.name }}</div>
+    <div>
+      <span>Quotes:</span>
+      <ul>
+        <li *ngFor="let quote of personDetails.quotes">{{ quote }}</li>
+      </ul>
+    </div>
+    <button (click)="replaceQuotes()">Replace quotes</button>
+  </ng-template>
 </section>
