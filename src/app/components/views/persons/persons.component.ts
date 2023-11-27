@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { GotDataService } from 'src/app/services/got-data.service';
 import { IPerson } from './persons.interface';
 import { IQuote } from '../quotes/quotes.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-persons',
@@ -31,8 +32,13 @@ export class PersonsComponent {
   personDetails: IPerson | null = null;
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
+  routeSub: Subscription | null = null;
 
-  constructor(private getGOTDataService: GotDataService) {}
+  constructor(
+    private getGOTDataService: GotDataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.serviceSub = this.getGOTDataService
@@ -40,11 +46,16 @@ export class PersonsComponent {
       .subscribe((data: IPerson[]) => {
         console.log(data);
         this.persons = data;
+        this.routeSub = this.route.params.subscribe((params) => {
+          this.personDetails =
+            this.persons.find((person) => person.slug === params['person']) ??
+            null;
+          this.personDetails && this.control.setValue(this.personDetails);
+        });
       });
     this.formControlSub = this.control.valueChanges.subscribe(
       (selectedPerson: IPerson | null) => {
-        console.log(selectedPerson);
-        this.personDetails = selectedPerson;
+        this.router.navigate(['/persons', selectedPerson?.slug]);
       }
     );
   }
@@ -53,14 +64,19 @@ export class PersonsComponent {
     return person?.name;
   }
 
+  redirectToHouse(slug: string) {
+    this.router.navigate(['/houses', slug]);
+  }
+
   replaceQuotes() {
     this.getGOTDataService
-      .getGOTQuotesData(Math.ceil(Math.random() * 5))
-      .subscribe((data: IQuote[]) => {
+      .getGOTQuotesData(Math.ceil(Math.random() * 10))
+      .subscribe((data: IQuote | IQuote[]) => {
         if (this.personDetails) {
-          this.personDetails.quotes = data.map(
-            (quote: IQuote) => quote.sentence
-          );
+          console.log(data);
+          this.personDetails.quotes = Array.isArray(data)
+            ? data.map((quote: IQuote) => quote.sentence)
+            : [data.sentence];
         }
       });
   }
@@ -68,5 +84,6 @@ export class PersonsComponent {
   ngOnDestroy() {
     this.formControlSub?.unsubscribe();
     this.serviceSub?.unsubscribe();
+    this.routeSub?.unsubscribe();
   }
 }

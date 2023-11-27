@@ -14,7 +14,7 @@
         [displayWith]="mutateSelectionForDisplay"
       >
         <mat-option *ngFor="let house of houses" [value]="house">
-          {{ house.name }}
+          {{ house?.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -22,6 +22,12 @@
 </section>
 <section class="house-persons">
   <ul>
-    <li *ngFor="let member of members">{{ member.name }}</li>
+    <li *ngFor="let member of members">
+      <a
+        href="javascript:void(0)"
+        (click)="routeToPersonDetails(member.slug)"
+        >{{ member?.name }}</a
+      >
+    </li>
   </ul>
 </section>
