@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgFor } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgFor } from '@angular/common';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 
 import { GotDataService } from 'src/app/services/got-data.service';
 import { IHouse, IMember } from './houses.interface';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-houses',
@@ -22,12 +22,14 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatAutocompleteModule,
     ReactiveFormsModule,
     NgFor,
+    CommonModule,
   ],
 })
-export class HousesComponent {
+export class HousesComponent implements OnInit {
   control = new FormControl();
   houses: IHouse[] = [];
   members: IMember[] = [];
+  filteredHouses: IHouse[] = [];
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
   routeSub: Subscription | null = null;
@@ -43,7 +45,7 @@ export class HousesComponent {
       .getGOTHouseData()
       .subscribe((data: IHouse[]) => {
         console.log(data);
-        this.houses = data;
+        this.houses = this.filteredHouses = data;
         this.routeSub = this.route.params.subscribe((params) => {
           const selectedHouse = this.houses.find(
             (house) => house.slug === params['house']
@@ -52,10 +54,16 @@ export class HousesComponent {
           this.control.setValue(selectedHouse);
         });
       });
+
     this.formControlSub = this.control.valueChanges.subscribe(
-      (selectedHouse: IHouse | null) => {
-        console.log(selectedHouse);
-        this.router.navigate(['/houses', selectedHouse?.slug]);
+      (selectedHouse: IHouse | string) => {
+        if (typeof selectedHouse === 'string') {
+          this.filteredHouses = this.houses.filter((house: IHouse) =>
+            house.name.toLowerCase().includes(selectedHouse.toLowerCase())
+          );
+        } else if (selectedHouse?.slug) {
+          this.router.navigate(['/houses', selectedHouse.slug]);
+        }
       }
     );
   }

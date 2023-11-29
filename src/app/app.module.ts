@@ -11,9 +11,10 @@ import { PersonsComponent } from './components/views/persons/persons.component';
 import { QuotesComponent } from './components/views/quotes/quotes.component';
 import { GotDataService } from './services/got-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HomepageComponent } from './components/views/homepage/homepage.component';
 
 @NgModule({
-  declarations: [AppComponent, NavigationsComponent, QuotesComponent],
+  declarations: [AppComponent, NavigationsComponent, QuotesComponent, HomepageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

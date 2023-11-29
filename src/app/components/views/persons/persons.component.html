@@ -13,7 +13,7 @@
         #personSearch="matAutocomplete"
         [displayWith]="mutateSelectionForDisplay"
       >
-        <mat-option *ngFor="let person of persons" [value]="person">
+        <mat-option *ngFor="let person of filteredPersons" [value]="person">
           {{ person.name }}
         </mat-option>
       </mat-autocomplete>

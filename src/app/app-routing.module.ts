@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HousesComponent } from './components/views/houses/houses.component';
 import { PersonsComponent } from './components/views/persons/persons.component';
 import { QuotesComponent } from './components/views/quotes/quotes.component';
+import { HomepageComponent } from './components/views/homepage/homepage.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,14 @@ const routes: Routes = [
   {
     path: 'quotes',
     component: QuotesComponent,
+  },
+  {
+    path: '',
+    component: HomepageComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
 

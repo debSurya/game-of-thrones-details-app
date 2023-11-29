@@ -29,6 +29,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PersonsComponent {
   control = new FormControl();
   persons: IPerson[] = [];
+  filteredPersons: IPerson[] = [];
   personDetails: IPerson | null = null;
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
@@ -45,7 +46,7 @@ export class PersonsComponent {
       .getGOTPersonData()
       .subscribe((data: IPerson[]) => {
         console.log(data);
-        this.persons = data;
+        this.persons = this.filteredPersons = data;
         this.routeSub = this.route.params.subscribe((params) => {
           this.personDetails =
             this.persons.find((person) => person.slug === params['person']) ??
@@ -53,9 +54,16 @@ export class PersonsComponent {
           this.personDetails && this.control.setValue(this.personDetails);
         });
       });
+
     this.formControlSub = this.control.valueChanges.subscribe(
-      (selectedPerson: IPerson | null) => {
-        this.router.navigate(['/persons', selectedPerson?.slug]);
+      (selectedPerson: IPerson | string) => {
+        if (typeof selectedPerson === 'string') {
+          this.filteredPersons = this.persons.filter((person: IPerson) =>
+            person.name.toLowerCase().includes(selectedPerson.toLowerCase())
+          );
+        } else if (selectedPerson?.slug) {
+          this.router.navigate(['/persons', selectedPerson?.slug]);
+        }
       }
     );
   }

@@ -13,7 +13,7 @@
         #houseSearch="matAutocomplete"
         [displayWith]="mutateSelectionForDisplay"
       >
-        <mat-option *ngFor="let house of houses" [value]="house">
+        <mat-option *ngFor="let house of filteredHouses" [value]="house">
           {{ house?.name }}
         </mat-option>
       </mat-autocomplete>
