@@ -4,6 +4,7 @@
   font-family: "GOT";
   src: url(assets/fonts/game_of_thrones.ttf) format("truetype");
 }
+
 html,
 body {
   height: 100%;
@@ -12,4 +13,15 @@ body {
   margin: 0;
   font-family: "GOT", sans-serif;
   background-color: #000000;
+  color: #979648;
+}
+
+.mat-mdc-autocomplete-panel {
+  background-color: #e2af6d !important;
+  border-radius: 5px;
+
+  mat-option {
+    font-family: "GOT", sans-serif;
+    font-size: 0.8rem;
+  }
 }

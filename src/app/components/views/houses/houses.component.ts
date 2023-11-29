@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -15,6 +15,7 @@ import { IHouse, IMember } from './houses.interface';
   templateUrl: './houses.component.html',
   styleUrls: ['./houses.component.scss'],
   standalone: true,
+  encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule,
     MatFormFieldModule,

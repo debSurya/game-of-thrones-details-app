@@ -1,33 +1,36 @@
-<section class="house-select">
-  <form class="houses-form">
-    <mat-form-field>
-      <mat-label>Houses</mat-label>
-      <input
-        type="text"
-        placeholder="Select a house"
-        matInput
-        [formControl]="control"
-        [matAutocomplete]="houseSearch"
-      />
-      <mat-autocomplete
-        #houseSearch="matAutocomplete"
-        [displayWith]="mutateSelectionForDisplay"
-      >
-        <mat-option *ngFor="let house of filteredHouses" [value]="house">
-          {{ house?.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-</section>
-<section class="house-persons">
-  <ul>
-    <li *ngFor="let member of members">
-      <a
-        href="javascript:void(0)"
-        (click)="routeToPersonDetails(member.slug)"
-        >{{ member?.name }}</a
-      >
-    </li>
-  </ul>
-</section>
+<div class="house-container">
+  <section class="house-select">
+    <form class="houses-form">
+      <mat-form-field>
+        <input
+          class="house-auto"
+          type="text"
+          placeholder="Select a house"
+          matInput
+          [formControl]="control"
+          [matAutocomplete]="houseSearch"
+          [matAutocompletePosition]="'below'"
+        />
+        <mat-autocomplete
+          #houseSearch="matAutocomplete"
+          [displayWith]="mutateSelectionForDisplay"
+        >
+          <mat-option *ngFor="let house of filteredHouses" [value]="house">
+            {{ house?.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </section>
+  <section class="house-persons">
+    <ul>
+      <li *ngFor="let member of members">
+        <a
+          href="javascript:void(0)"
+          (click)="routeToPersonDetails(member.slug)"
+          >{{ member?.name }}</a
+        >
+      </li>
+    </ul>
+  </section>
+</div>

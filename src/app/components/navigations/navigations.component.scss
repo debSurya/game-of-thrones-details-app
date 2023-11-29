@@ -1,7 +1,7 @@
 a {
   text-decoration: none;
   color: #000000;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .nav-section {
@@ -9,5 +9,26 @@ a {
   justify-content: space-around;
   align-items: center;
   height: 60px;
-  background-color: #786637;
+  background-color: #b9963a;
+
+  .nav-item {
+    width: 180px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    border-left: 5px double;
+    border-right: 5px double;
+    background-color: #e2af6d;
+
+    a {
+      transition: 0.5s;
+
+      &:hover {
+        transform: scale(1.3);
+        opacity: 1;
+        filter: drop-shadow(0.5px 0.5px 0px #000000);
+      }
+    }
+  }
 }

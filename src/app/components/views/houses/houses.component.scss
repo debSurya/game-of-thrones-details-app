@@ -1,0 +1,15 @@
+.house-container {
+  background-color: #272727;
+  height: 100%;
+  padding-top: 20px;
+  padding-left: 10px;
+  border-top: 5px solid black;
+
+  .mdc-text-field {
+    background-color: #e2af6d !important;
+    width: 400px;
+    font-family: "GOT", sans-serif;
+    font-size: 0.9rem;
+    border-radius: 5px;
+  }
+}
