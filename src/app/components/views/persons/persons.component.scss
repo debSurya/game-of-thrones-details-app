@@ -2,14 +2,19 @@
   background-color: #272727;
   height: 100%;
   padding-top: 1.25rem;
-  padding-left: 0.625rem;
+  padding-left: 3.125rem;
   border-top: 0.313rem solid black;
 
   .mdc-text-field {
     background-color: #e2af6d !important;
-    width: 17.5rem;
+    width: 18.75rem;
     font-family: "GOT", sans-serif;
     font-size: 1rem;
     border-radius: 0.313rem;
+
+    .mat-icon {
+      color: #505908;
+      font-size: 1.5rem;
+    }
   }
 }

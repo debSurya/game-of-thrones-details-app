@@ -1,5 +1,5 @@
 <section class="house-members">
-  <div class="members">
+  <div *ngIf="!!houseImageSrc" class="members">
     <div class="members-head">Members</div>
     <div class="members-list">
       <div class="member-field" *ngFor="let member of members">

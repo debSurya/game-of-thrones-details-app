@@ -41,7 +41,6 @@ export class PersonQuotesComponent implements OnChanges {
       .getGOTQuotesData(Math.ceil(Math.random() * 10))
       .subscribe((data: IQuote | IQuote[]) => {
         if (this.personDetails) {
-          console.log(data);
           this.personDetails.quotes = Array.isArray(data)
             ? data.map((quote: IQuote) => quote.sentence)
             : [data.sentence];

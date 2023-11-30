@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -44,6 +45,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     MatAutocompleteModule,
     ReactiveFormsModule,
     CommonModule,
+    MatIconModule,
   ],
   providers: [
     {

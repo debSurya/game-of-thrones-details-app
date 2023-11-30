@@ -12,6 +12,7 @@ body {
 body {
   margin: 0;
   font-family: "GOT", sans-serif;
+  letter-spacing: 0.05rem;
   background-color: #000000;
   color: #979648;
 }
@@ -26,6 +27,16 @@ body {
 
     &:hover {
       background-color: #b9963a !important;
+    }
+
+    &.mdc-list-item--selected {
+      span {
+        color: #d30000 !important;
+      }
+    }
+
+    mat-pseudo-checkbox::after {
+      color: #d30000 !important;
     }
   }
 }
