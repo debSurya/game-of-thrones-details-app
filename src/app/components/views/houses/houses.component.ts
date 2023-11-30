@@ -1,10 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { GotDataService } from 'src/app/services/got-data.service';
@@ -14,17 +9,7 @@ import { IHouse, IMember } from './houses.interface';
   selector: 'app-houses',
   templateUrl: './houses.component.html',
   styleUrls: ['./houses.component.scss'],
-  standalone: true,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    NgFor,
-    CommonModule,
-  ],
 })
 export class HousesComponent implements OnInit {
   control = new FormControl();
@@ -34,13 +19,9 @@ export class HousesComponent implements OnInit {
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
   routeSub: Subscription | null = null;
-  selectedHouseImage: string = '';
+  selectedHouseImageSrc: string = '';
 
-  constructor(
-    private getGOTDataService: GotDataService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private getGOTDataService: GotDataService) {}
 
   ngOnInit() {
     this.serviceSub = this.getGOTDataService
@@ -48,13 +29,6 @@ export class HousesComponent implements OnInit {
       .subscribe((data: IHouse[]) => {
         console.log(data);
         this.houses = this.filteredHouses = data;
-        this.routeSub = this.route.params.subscribe((params) => {
-          const selectedHouse = this.houses.find(
-            (house) => house.slug === params['house']
-          );
-          this.members = selectedHouse?.members ?? [];
-          this.control.setValue(selectedHouse);
-        });
       });
 
     this.formControlSub = this.control.valueChanges.subscribe(
@@ -64,8 +38,9 @@ export class HousesComponent implements OnInit {
             house.name.toLowerCase().includes(selectedHouse.toLowerCase())
           );
         } else if (selectedHouse?.slug) {
-          this.router.navigate(['/houses', selectedHouse.slug]);
-          this.selectedHouseImage = `./assets/images/${selectedHouse.slug}.png`;
+          this.members = selectedHouse?.members ?? [];
+          this.control.setValue(selectedHouse);
+          this.selectedHouseImageSrc = `./assets/images/${selectedHouse.slug}.png`;
         }
       }
     );
@@ -73,10 +48,6 @@ export class HousesComponent implements OnInit {
 
   mutateSelectionForDisplay(house: IHouse) {
     return house?.name;
-  }
-
-  routeToPersonDetails(slug: string) {
-    this.router.navigate(['/persons', slug]);
   }
 
   ngOnDestroy() {

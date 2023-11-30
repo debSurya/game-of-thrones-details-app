@@ -1,0 +1,20 @@
+<section class="person-details">
+  <ng-template [ngIf]="!!personDetails">
+    <div>Name: {{ personDetails.name }}</div>
+    <div>
+      House:
+      <a
+        href="javascript:void(0)"
+        (click)="redirectToHouse(personDetails.house.slug)"
+        >{{ personDetails.house.name }}</a
+      >
+    </div>
+    <div>
+      <span>Quotes:</span>
+      <ul>
+        <li *ngFor="let quote of personDetails.quotes">{{ quote }}</li>
+      </ul>
+    </div>
+    <button (click)="replaceQuotes()">Replace quotes</button>
+  </ng-template>
+</section>
