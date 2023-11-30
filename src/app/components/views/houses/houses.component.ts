@@ -18,7 +18,6 @@ export class HousesComponent implements OnInit {
   filteredHouses: IHouse[] = [];
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
-  routeSub: Subscription | null = null;
   selectedHouseImageSrc: string = '';
 
   constructor(private getGOTDataService: GotDataService) {}
@@ -27,8 +26,14 @@ export class HousesComponent implements OnInit {
     this.serviceSub = this.getGOTDataService
       .getGOTHouseData()
       .subscribe((data: IHouse[]) => {
-        console.log(data);
         this.houses = this.filteredHouses = data;
+        if (history.state?.house) {
+          this.control.setValue(
+            this.houses.find(
+              (house: IHouse) => house.slug === history.state.house
+            )
+          );
+        }
       });
 
     this.formControlSub = this.control.valueChanges.subscribe(
@@ -39,7 +44,6 @@ export class HousesComponent implements OnInit {
           );
         } else if (selectedHouse?.slug) {
           this.members = selectedHouse?.members ?? [];
-          this.control.setValue(selectedHouse);
           this.selectedHouseImageSrc = `./assets/images/${selectedHouse.slug}.png`;
         }
       }
@@ -53,6 +57,5 @@ export class HousesComponent implements OnInit {
   ngOnDestroy() {
     this.formControlSub?.unsubscribe();
     this.serviceSub?.unsubscribe();
-    this.routeSub?.unsubscribe();
   }
 }

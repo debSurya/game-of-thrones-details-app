@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 
@@ -9,6 +9,7 @@ import { IPerson } from './persons.interface';
   selector: 'app-persons',
   templateUrl: './persons.component.html',
   styleUrls: ['./persons.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PersonsComponent {
   control = new FormControl();
@@ -25,6 +26,13 @@ export class PersonsComponent {
       .getGOTPersonData()
       .subscribe((data: IPerson[]) => {
         this.persons = this.filteredPersons = data;
+        if (history.state?.person) {
+          this.control.setValue(
+            this.persons.find(
+              (person: IPerson) => person.slug === history.state.person
+            )
+          );
+        }
       });
 
     this.formControlSub = this.control.valueChanges.subscribe(

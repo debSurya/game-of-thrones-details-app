@@ -1,20 +1,21 @@
 <section class="person-details">
   <ng-template [ngIf]="!!personDetails">
-    <div>Name: {{ personDetails.name }}</div>
-    <div>
+    <div class="person-name">Name: {{ personDetails.name }}</div>
+    <div class="person-house">
       House:
-      <a
-        href="javascript:void(0)"
-        (click)="redirectToHouse(personDetails.house.slug)"
-        >{{ personDetails.house.name }}</a
+      <a href="javascript:void(0)" (click)="redirectToHouse(personDetails)"
+        >{{ personDetails.house?.name }}&emsp;<span>&rArr;</span></a
       >
     </div>
-    <div>
-      <span>Quotes:</span>
-      <ul>
-        <li *ngFor="let quote of personDetails.quotes">{{ quote }}</li>
-      </ul>
+    <div class="person-quotes">
+      <div class="lbl-quotes">Quotes</div>
+      <div class="quote" *ngFor="let quote of personDetails.quotes">
+        <div class="bullet">&raquo;&ensp;</div>
+        <div class="text">{{ quote }}</div>
+      </div>
     </div>
-    <button (click)="replaceQuotes()">Replace quotes</button>
+    <button class="btn-replace-quotes" (click)="replaceQuotes()">
+      Replace quotes
+    </button>
   </ng-template>
 </section>

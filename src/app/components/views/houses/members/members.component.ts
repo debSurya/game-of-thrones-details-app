@@ -15,6 +15,10 @@ export class MembersComponent {
   constructor(private router: Router) {}
 
   routeToPersonDetails(slug: string) {
-    this.router.navigate(['/persons', slug]);
+    this.router.navigate(['/persons'], {
+      state: {
+        person: slug,
+      },
+    });
   }
 }

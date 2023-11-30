@@ -1,0 +1,15 @@
+.persons-container {
+  background-color: #272727;
+  height: 100%;
+  padding-top: 1.25rem;
+  padding-left: 0.625rem;
+  border-top: 0.313rem solid black;
+
+  .mdc-text-field {
+    background-color: #e2af6d !important;
+    width: 17.5rem;
+    font-family: "GOT", sans-serif;
+    font-size: 1rem;
+    border-radius: 0.313rem;
+  }
+}

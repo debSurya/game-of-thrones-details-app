@@ -26,8 +26,14 @@ export class PersonQuotesComponent implements OnChanges {
     }
   }
 
-  redirectToHouse(slug: string) {
-    this.router.navigate(['/houses', slug]);
+  redirectToHouse(person: IPerson) {
+    if (person.house) {
+      this.router.navigate(['/houses'], {
+        state: {
+          house: person.house.slug,
+        },
+      });
+    }
   }
 
   replaceQuotes() {

@@ -8,11 +8,11 @@ import { HomepageComponent } from './components/views/homepage/homepage.componen
 
 const routes: Routes = [
   {
-    path: 'houses/:house',
+    path: 'houses',
     component: HousesComponent,
   },
   {
-    path: 'persons/:person',
+    path: 'persons',
     component: PersonsComponent,
   },
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,22 +1,24 @@
-<section class="persons-select">
-  <form class="person-form">
-    <mat-form-field>
-      <input
-        type="text"
-        placeholder="Select a person"
-        matInput
-        [formControl]="control"
-        [matAutocomplete]="personSearch"
-      />
-      <mat-autocomplete
-        #personSearch="matAutocomplete"
-        [displayWith]="mutateSelectionForDisplay"
-      >
-        <mat-option *ngFor="let person of filteredPersons" [value]="person">
-          {{ person.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-</section>
-<app-person-quotes [selectedPerson]="selectedPerson" />
+<div class="persons-container">
+  <section class="persons-select">
+    <form class="person-form">
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Select a person"
+          matInput
+          [formControl]="control"
+          [matAutocomplete]="personSearch"
+        />
+        <mat-autocomplete
+          #personSearch="matAutocomplete"
+          [displayWith]="mutateSelectionForDisplay"
+        >
+          <mat-option *ngFor="let person of filteredPersons" [value]="person">
+            {{ person.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </section>
+  <app-person-quotes [selectedPerson]="selectedPerson" />
+</div>
