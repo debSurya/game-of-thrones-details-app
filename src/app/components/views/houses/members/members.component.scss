@@ -34,20 +34,15 @@
           transition: transform 0.2s ease-in-out;
         }
 
-        &:hover {
-          span {
-            font-size: 1.4rem;
-          }
-
-          &::before {
-            transform-origin: left;
-            transform: scaleX(1);
-          }
+        &:hover:before {
+          transform-origin: left;
+          transform: scaleX(1);
         }
 
         span {
-          font-size: 1.1rem;
-          transition: 0.3s;
+          font-size: 1.2rem;
+          position: relative;
+          bottom: 2px;
         }
       }
     }
