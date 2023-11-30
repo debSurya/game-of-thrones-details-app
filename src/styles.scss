@@ -23,5 +23,9 @@ body {
   mat-option {
     font-family: "GOT", sans-serif;
     font-size: 0.8rem;
+
+    &:hover {
+      background-color: #b9963a !important;
+    }
   }
 }

@@ -22,15 +22,21 @@
       </mat-form-field>
     </form>
   </section>
-  <section class="house-persons">
-    <ul>
-      <li *ngFor="let member of members">
-        <a
-          href="javascript:void(0)"
-          (click)="routeToPersonDetails(member.slug)"
-          >{{ member?.name }}</a
-        >
-      </li>
-    </ul>
+  <section class="house-members">
+    <div class="members">
+      <div class="members-head">Members</div>
+      <div class="members-list">
+        <div class="member-field" *ngFor="let member of members">
+          <a
+            href="javascript:void(0)"
+            (click)="routeToPersonDetails(member.slug)"
+            >{{ member?.name }}&emsp;<span>&rArr;</span></a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="house-logo">
+      <img [src]="selectedHouseImage" alt="lannister" />
+    </div>
   </section>
 </div>

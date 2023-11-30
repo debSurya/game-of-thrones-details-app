@@ -34,6 +34,7 @@ export class HousesComponent implements OnInit {
   serviceSub: Subscription | null = null;
   formControlSub: Subscription | null = null;
   routeSub: Subscription | null = null;
+  selectedHouseImage: string = '';
 
   constructor(
     private getGOTDataService: GotDataService,
@@ -64,6 +65,7 @@ export class HousesComponent implements OnInit {
           );
         } else if (selectedHouse?.slug) {
           this.router.navigate(['/houses', selectedHouse.slug]);
+          this.selectedHouseImage = `./assets/images/${selectedHouse.slug}.png`;
         }
       }
     );
